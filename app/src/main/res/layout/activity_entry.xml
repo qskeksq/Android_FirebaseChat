@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.firebasechat2.EntryActivity">
+
+
+    <Button
+        android:id="@+id/signin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/button"
+        android:onClick="goSignin"
+        android:text="@string/signin"
+        android:textColor="@color/color_singin_text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/signup" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:onClick="goSignup"
+        android:text="@string/signup"
+        android:textColor="@color/color_signup_text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/signin"
+        app:layout_constraintLeft_toRightOf="@+id/signin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/signin"
+        app:layout_constraintVertical_bias="1.0" />
+</android.support.constraint.ConstraintLayout>

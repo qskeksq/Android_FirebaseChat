@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">FirebaseChat2</string>
+
+    <string name="tab_friend_list">친구</string>
+    <string name="tab_room_list">대화</string>
+    <string name="tab_time_line">타임라인</string>
+    <string name="tab_profile">프로필</string>
+    <string name="title_activity_friend_list">FriendListActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="signin">로그인</string>
+    <string name="signup">회원가입</string>
+    <string name="button_signup">가입하기</string>
+
+    <string name="button_facebook">Facebook 연동</string>
+    <string name="button_google">Google 연동</string>
+
+    <string name="button_make_room">대화</string>
+
+    <string name="toolbar_select_friend">친구선택</string>
+
+    <string name="button_add_friend">추가</string>
+
+    <string name="chat_normal">일반채팅</string>
+    <string name="chat_open">공개채팅</string>
+    <string name="chat_secret">비밀채팅</string>
+
+</resources>

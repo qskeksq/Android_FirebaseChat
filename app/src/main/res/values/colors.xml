@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="color_statusbar">#3B4255</color>
+    <color name="color_toolbar">#464E65</color>
+
+    <color name="color_unselected_tab">#9197AF</color>
+    <color name="color_selected_tab">#ffffff</color>
+
+    <color name="color_friend_text">#000000</color>
+    <color name="color_singin_text">#373737</color>
+    <color name="color_signup_text">#01AE00</color>
+
+    <color name="color_button_next">#06BF3D</color>
+    <color name="color_text_next">#ffffff</color>
+    <color name="color_text_facebook">#475993</color>
+    <color name="color_text_google">#DC4E41</color>
+
+    <color name="color_add_background">#99000000</color>
+
+    <color name="color_button_send">#B4B8BE</color>
+
+    <color name="color_chat_room_background">#849EBF</color>
+
+    <color name="color_chat_bubble_right">#B1ED89</color>
+
+    <color name="color_message_read_or_not">#FEE42D</color>
+</resources>
