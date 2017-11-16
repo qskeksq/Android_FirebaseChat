@@ -6,7 +6,7 @@
   - 방 추가, 친구 초개
   - 채팅하기
 
-![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/20171106_141007_450x800.jpg)
+![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/20171106_141007_360x640.jpg)
 
 ## 회원가입
 - Google 이메일 인증
