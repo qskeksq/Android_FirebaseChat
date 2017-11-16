@@ -7,10 +7,8 @@
   - 채팅하기
 
 ![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/AC_%5B20171106-154248%5D.gif)
-![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/20171106_154652_360x640.jpg)
-![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/20171106_154655_360x640.jpg)
-![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/20171106_154659_360x640.jpg)
-![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/20171106_154703_360x640.jpg)
+![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/AC_[20171116-171323].gif)
+![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/AC_[20171116-171354].gif)
 ![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/AC_%5B20171106-154533%5D.gif)
 ![](https://github.com/qskeksq/FirebaseChat/blob/master/pic/AC_%5B20171106-154601%5D.gif)
 
