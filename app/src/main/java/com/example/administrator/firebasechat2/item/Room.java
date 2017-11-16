@@ -14,6 +14,7 @@ public class Room {
     public String id;
     public String title;
     public Message last_msg;
+    public int member_count;
     public long created_time;
     public long last_msg_time;
     public int msg_count;

@@ -9,6 +9,7 @@ public class Const {
     public static final String SIGN_UP_SP = "sign_up_sp";
     public static final String SIGN_IN_SP = "sign_in_sp";
 
+    public static final String SP_ID = "sp_up_id";
     public static final String SP_NAME = "sp_up_name";
     public static final String SP_EMAIL = "sp_up_email";
     public static final String SP_PWD = "sp_up_pwd";
@@ -24,5 +25,12 @@ public class Const {
 
     public static final int MY_MESSAGE = 0;
     public static final int OTHER_MESSAGE = 1;
+
+    public static final int PAGE_FRIEND_LIST = 0;
+    public static final int PAGE_CHAT_ROOM_LIST = 1;
+
+    public static final String ROOM_MEMBERS = "members";
+    public static final String ROOM_MEMBER_COUNT = "member_count";
+    public static final String ROOM_RECEIVED_USERS = "received_users";
 
 }

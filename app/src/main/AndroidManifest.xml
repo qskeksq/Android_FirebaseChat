@@ -22,7 +22,7 @@
         <activity android:name=".MakeRoomActivity" />
         <activity android:name=".AddFriendActivity" />
         <activity android:name=".RoomActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
     </application>
 
 </manifest>

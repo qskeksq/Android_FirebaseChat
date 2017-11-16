@@ -28,7 +28,7 @@ public class User {
 
     // 친구 목록
     public List<User> friend_list;
-    // 내 채팅방방
+    // 내 채팅방
    public List<Room> my_chat_room;
 
     public User() {

@@ -37,11 +37,15 @@ public class FriendListView extends FrameLayout {
     private String myId;
     private Context context;
 
+    /**
+     * 초기화, 인플레이션
+     */
     public FriendListView(@NonNull Context context) {
         super(context);
         this.context = context;
         view = LayoutInflater.from(context).inflate(R.layout.layout_friend_list, this, false);
-        addView(view); // 외부에서 인플레이션 할 경우 반드시 부모에 붙여줘야 한다
+        // 외부에서 인플레이션 할 경우 반드시 부모에 붙여줘야 한다
+        addView(view);
         init();
         setFriendRecycler();
         setListener();
@@ -50,12 +54,14 @@ public class FriendListView extends FrameLayout {
     private void init() {
         friendRecycler = (RecyclerView) view.findViewById(R.id.friendRecycler);
 
+        // 아이디, 데이터베이스 초기화
         myId = StringUtil.replaceEmailComma(PreferenceUtil.getString(context, Const.SP_EMAIL));
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("user").child(myId);
     }
 
     private void setListener(){
+        // 내 데이터베이스에서 친구 목록 불러오기
         userRef.child(Const.FRIEND_LIST).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

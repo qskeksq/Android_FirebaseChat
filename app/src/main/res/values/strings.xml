@@ -25,4 +25,9 @@
     <string name="chat_open">공개채팅</string>
     <string name="chat_secret">비밀채팅</string>
 
+    <string name="profile_name">이름</string>
+    <string name="profile_phone">전화번호</string>
+    <string name="profile_email">계정</string>
+    <string name="profile_password">비밀번호</string>
+
 </resources>

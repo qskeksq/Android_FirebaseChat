@@ -28,4 +28,8 @@
     <color name="color_chat_bubble_right">#B1ED89</color>
 
     <color name="color_message_read_or_not">#FEE42D</color>
+
+    <color name="color_room_list_divider">#F1F2F4</color>
+
+    <color name="color_profile_image">#5ec3bf</color>
 </resources>

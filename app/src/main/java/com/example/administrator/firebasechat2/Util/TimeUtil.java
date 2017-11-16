@@ -9,8 +9,15 @@ import java.text.SimpleDateFormat;
 public class TimeUtil {
 
     public static String sdf(long time){
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        return sdf.format(time);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        String temp = sdf.format(time);
+        String hour = temp.split(":")[1];
+        if(Integer.parseInt(hour) < 12){
+            temp = "오전"+temp;
+        } else {
+            temp = "오후"+temp;
+        }
+        return temp;
     }
 
 }

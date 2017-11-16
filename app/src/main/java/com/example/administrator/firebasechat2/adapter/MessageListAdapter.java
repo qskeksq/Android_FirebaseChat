@@ -78,7 +78,11 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         Message message = messageList.get(position);
         holder.message.setText(message.content);
         holder.time.setText(TimeUtil.sdf(message.time));
-
+        if(message.read_count>-1){
+            holder.readCount.setText(message.read_count+"");
+        } else {
+            holder.readCount.setText("0");
+        }
         if(!messageList.get(position).id.equals(PreferenceUtil.getString(context, Const.SP_EMAIL))){
             Log.e("메시지 확인", "메시지 : "+message.name);
             holder.name.setText(message.name);

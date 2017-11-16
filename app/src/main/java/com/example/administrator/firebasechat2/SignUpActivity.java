@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,7 +49,11 @@ public class SignUpActivity extends AppCompatActivity {
         setListener();
     }
 
+    /**
+     * 뷰, 파이어베이스 초기화
+     */
     private void init() {
+        // 뷰 초기화
         editEmail = (AppCompatEditText) findViewById(R.id.editEmail);
         btnNext = (Button) findViewById(R.id.btnNext);
         btnFacebook = (Button) findViewById(R.id.btnFacebook);
@@ -56,18 +61,19 @@ public class SignUpActivity extends AppCompatActivity {
         editName = (AppCompatEditText) findViewById(R.id.editName);
         editPassword = (EditText) findViewById(R.id.editPassword);
         editSecondPwd = (EditText) findViewById(R.id.editSecondPwd);
-
+        // 파이어베이스 데이터베이스, 인증정보 초기화
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("user");
         mAuth = FirebaseAuth.getInstance();
+        
     }
 
 
     /**
-     * 유효값 처리
+     * 유효값 확인
      */
     private void setListener(){
-
+        // 이름
         editName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -88,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // 이메일
         editEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -109,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // 1차 비밀번호
         editPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -137,7 +143,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // 2차 비밀번호
         editSecondPwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -164,6 +170,7 @@ public class SignUpActivity extends AppCompatActivity {
      * 유효값 확인하고 메인으로 넘어감
      */
     public void signup(View view){
+
         if(!isValidName){
             Toast.makeText(this, "이름을 확인해주세요", Toast.LENGTH_SHORT).show();
             return;
@@ -181,29 +188,34 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        // 1. 사용자 생성
+        // 1. 인증 서버에 사용자 생성
         mAuth.createUserWithEmailAndPassword(editEmail.getText().toString(), editPassword.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         mUser = mAuth.getCurrentUser();
-                        // 2. 이메일 발송(사용자 생성 성공)
+                        // 2.1 (사용자 생성 성공시) 이메일 발송
                         if(task.isSuccessful()){
-                            // 사용자 정보를 데이터베이스에 생성
+                            // 3. 인증 서버에 사용자 정보 등록
+                            FirebaseUser fUser = mAuth.getCurrentUser();
+                            UserProfileChangeRequest.Builder profile = new UserProfileChangeRequest.Builder();
+                            profile.setDisplayName(editName.getText().toString());
+                            fUser.updateProfile(profile.build());
+                            // 4. Realtime Database에 사용자 정보 등록
                             User user = new User();
                             user.id = mUser.getUid();
                             user.name = editName.getText().toString();
                             user.email = editEmail.getText().toString();
                             user.password = editPassword.getText().toString();
+                            // 키 값(qskeksq@hanmail_comma_net)으로 데이터베이스에 저장
+                            userRef.child(StringUtil.replaceEmailComma(user.email)).setValue(user);
 
-                            String tempEmail = StringUtil.replaceEmailComma(user.email);
-                            userRef.child(tempEmail).setValue(user);
-
+                            // 5. 이메일 인증 전송
                             mUser.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            // 3. 발송 성공
+                                            // 5.1 발송 성공시
                                             if(task.isSuccessful()){
                                                 // getBaseContext()와 this 의 중요한 차이!!
                                                 // Context                      <- getBaseContext() 리턴값
@@ -211,6 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 //      - ThemeContext
                                                 //         - AppCompatActivty
                                                 //            - ..
+                                                // 가입하고 바로 로그인 페이지로 넘어간다
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                                                 builder.setTitle("Notice");
                                                 builder.setMessage("이메일을 발송했습니다");
@@ -227,22 +240,21 @@ public class SignUpActivity extends AppCompatActivity {
                                             }
                                         }
                                     })
+                                    // 5.2 이메일 전송 실패
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(SignUpActivity.this, "이메일 발송 실패", Toast.LENGTH_SHORT).show();
                                         }
                                     });
-
-                        } else {
-                            Toast.makeText(SignUpActivity.this, "사용자 생성 실패", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
+                // 2.2 사용자 정보 실패시
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUpActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "사용자 생성 실패 : "+e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

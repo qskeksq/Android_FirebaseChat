@@ -47,27 +47,34 @@ public class AddFriendActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("친구 찾기");
     }
 
+    /**
+     * 친구 추가
+     */
     public void addFriend(View view){
 
         final String email = editFriendEmail.getText().toString();
         final String myEmail = PreferenceUtil.getString(this, Const.SP_EMAIL);
 
+        // 현재 내 아이디일 경우
         if(email.equals(myEmail)){
             Toast.makeText(AddFriendActivity.this, "내 아이디입니다", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // 데이터베이스에서 전체 친구 목록 가져와서 입력한 아이디 존재하는지 검사
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String friendEmail = StringUtil.recoverEmailComma(snapshot.getKey());
+                    // 존재할 경우 내 데이터베이스에 추가
                     if(email.equals(friendEmail)){
                         userRef.child(StringUtil.replaceEmailComma(myEmail)).child("friend_list").child(snapshot.getKey()).setValue(snapshot.getValue());
                         Toast.makeText(AddFriendActivity.this, friendEmail+"님이 추가되었습니다", Toast.LENGTH_SHORT).show();
                         ifExists = true;
                     }
                 }
+                // 친구가 추가되었으면 액티비티 종료
                 if(ifExists){
                     finish();
                 } else {

@@ -110,9 +110,9 @@ public class MakeRoomActivity extends AppCompatActivity implements SelectFriendL
         room.id = roomRef.push().getKey();
         room.members = memberList;
         room.title = room.toStringFriend();
+        room.member_count = room.members.size();
 
         roomRef.child(room.id).setValue(room);
-
 
         userRef.child(StringUtil.replaceEmailComma(myId)).child(Const.MY_CHAT_ROOM).child(room.id).child("id").setValue(room.id);
         userRef.child(StringUtil.replaceEmailComma(myId)).child(Const.MY_CHAT_ROOM).child(room.id).child("title").setValue(room.title);
